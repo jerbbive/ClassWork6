@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.OleDb;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,26 +13,35 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Data.OleDb;
 
 namespace ClassWork6
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    /// Meh
-    public partial class MainWindow : Window;
+    
+    public partial class MainWindow : Window
     {
-        
+        OleDbConnection cn;
+
         public MainWindow()
         {
             InitializeComponent();
+            cn = new OleDbConnection("ClassWork6ConnectionString");
             
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
+            string query = "select * from Assets";
+            OleDbCommand cmd = new OleDbCommand(query, cn);
+            cn.Open();
+            OleDbDataReader read = cmd.ExecuteReader();
+            string data = "";
+            while (read.Read())
+            {
+                data += read[0].ToString() + "\n";
+            }
         }
     }
 }
