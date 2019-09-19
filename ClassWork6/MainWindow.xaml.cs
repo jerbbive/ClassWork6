@@ -19,7 +19,7 @@ namespace ClassWork6
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    
+    /// Meh
     public partial class MainWindow : Window;
     {
         
